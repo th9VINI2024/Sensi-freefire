@@ -60,6 +60,8 @@
         alert("Digite um DPI válido");
         return;
       }
+      const peso = 0.65; // entre 0 e 1
+const fator = Math.pow(base / dpi, peso);
 
       // ponto base (ajusta depois)
       const base = 400;
