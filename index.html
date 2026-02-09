@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensi Free Fire</title>
 
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    input, button {
+      width: 80%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      background: #00ff99;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🔥 Sensi Free Fire 🔥</h1>
+
+  <p>Digite seu DPI:</p>
+  <input type="number" id="dpi" placeholder="Ex: 400">
+
+  <button onclick="calcular()">Calcular Sensibilidade</button>
+
+  <div class="result" id="resultado"></div>
+
+  <script>
+    function limitar(valor, min, max) {
+      return Math.min(Math.max(valor, min), max);
+    }
+
+    function calcular() {
+      const dpi = parseInt(document.getElementById("dpi").value);
+
+      if (!dpi || dpi < 200) {
+        alert("Digite um DPI válido");
+        return;
+      }
+
+      // ponto base (ajusta depois)
+      const base = 400;
+
+      let geral = 90 * (base / dpi);
+      let redDot = 85 * (base / dpi);
+      let mira2x = 75 * (base / dpi);
+      let mira4x = 65 * (base / dpi);
+      let awm = 55 * (base / dpi);
+
+      // limites seguros
+      geral = limitar(geral, 60, 100);
+      redDot = limitar(redDot, 55, 95);
+      mira2x = limitar(mira2x, 45, 85);
+      mira4x = limitar(mira4x, 35, 75);
+      awm = limitar(awm, 25, 65);
+
+      document.getElementById("resultado").innerHTML = `
+        <h3>📊 Sensibilidade Calculada</h3>
+        Geral: ${geral.toFixed(0)}<br>
+        Red Dot: ${redDot.toFixed(0)}<br>
+        Mira 2x: ${mira2x.toFixed(0)}<br>
+        Mira 4x: ${mira4x.toFixed(0)}<br>
+        AWM: ${awm.toFixed(0)}
+      `;
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
