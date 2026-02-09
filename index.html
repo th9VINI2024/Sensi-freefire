@@ -62,24 +62,23 @@
       }
 
       // ponto base
-      const base = 400;
+const base = 400;
 
-      // controle de influência do DPI
-      const peso = 0.75;
+// controle de influência do DPI
+const peso = 0.85;
+
+// fator suavizado
+let fator = Math.pow(base / dpi, peso);
+
+// segurança extra
+fator = limitar(fator, 0.7, 1.3);
+
+// sensibilidades
 let geral = 200 * fator * 1.08;
-
-      // fator suavizado
-      let fator = Math.pow(base / dpi, peso);
-
-      // segurança extra
-      fator = limitar(fator, 0.7, 1.3);
-
-      // sensibilidades
-      let geral = 200 * fator;
-      let redDot = 190 * fator;
-      let mira2x = 170 * fator;
-      let mira4x = 150 * fator;
-      let awm = 130 * fator;
+let redDot = 190 * fator;
+let mira2x = 170 * fator;
+let mira4x = 150 * fator;
+let awm = 130 * fator;
 
       // limites
       geral = limitar(geral, 140, 200);
