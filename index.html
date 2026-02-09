@@ -65,7 +65,8 @@
       const base = 400;
 
       // controle de influência do DPI
-      const peso = 0.65;
+      const peso = 0.75;
+let geral = 200 * fator * 1.08;
 
       // fator suavizado
       let fator = Math.pow(base / dpi, peso);
