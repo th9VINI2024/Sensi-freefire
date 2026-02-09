@@ -64,18 +64,17 @@
       // ponto base (ajusta depois)
       const base = 400;
 
-      let geral = 90 * (base / dpi);
-      let redDot = 85 * (base / dpi);
-      let mira2x = 75 * (base / dpi);
-      let mira4x = 65 * (base / dpi);
-      let awm = 55 * (base / dpi);
+let geral = 180 * (base / dpi);
+let redDot = 170 * (base / dpi);
+let mira2x = 150 * (base / dpi);
+let mira4x = 130 * (base / dpi);
+let awm = 110 * (base / dpi);
 
-      // limites seguros
-      geral = limitar(geral, 60, 100);
-      redDot = limitar(redDot, 55, 95);
-      mira2x = limitar(mira2x, 45, 85);
-      mira4x = limitar(mira4x, 35, 75);
-      awm = limitar(awm, 25, 65);
+geral = limitar(geral, 120, 200);
+redDot = limitar(redDot, 110, 190);
+mira2x = limitar(mira2x, 100, 180);
+mira4x = limitar(mira4x, 90, 170);
+awm = limitar(awm, 80, 160);
 
       document.getElementById("resultado").innerHTML = `
         <h3>📊 Sensibilidade Calculada</h3>
