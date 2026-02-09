@@ -54,38 +54,47 @@
     }
 
     function calcular() {
-      const dpi = parseInt(document.getElementById("dpi").value);
+  const dpi = parseInt(document.getElementById("dpi").value);
 
-      if (!dpi || dpi < 200) {
-        alert("Digite um DPI válido");
-        return;
-      }
-      const peso = 0.65; // entre 0 e 1
-const fator = Math.pow(base / dpi, peso);
+  if (!dpi || dpi < 200) {
+    alert("Digite um DPI válido");
+    return;
+  }
 
-      // ponto base (ajusta depois)
-      const base = 400;
+  // ponto base
+  const base = 400;
 
-let geral = 180 * (base / dpi);
-let redDot = 170 * (base / dpi);
-let mira2x = 150 * (base / dpi);
-let mira4x = 130 * (base / dpi);
-let awm = 110 * (base / dpi);
+  // controle de influência do DPI
+  const peso = 0.65;
 
-geral = limitar(geral, 120, 200);
-redDot = limitar(redDot, 110, 190);
-mira2x = limitar(mira2x, 100, 180);
-mira4x = limitar(mira4x, 90, 170);
-awm = limitar(awm, 80, 160);
+  // fator suavizado
+  let fator = Math.pow(base / dpi, peso);
 
-      document.getElementById("resultado").innerHTML = `
-        <h3>📊 Sensibilidade Calculada</h3>
-        Geral: ${geral.toFixed(0)}<br>
-        Red Dot: ${redDot.toFixed(0)}<br>
-        Mira 2x: ${mira2x.toFixed(0)}<br>
-        Mira 4x: ${mira4x.toFixed(0)}<br>
-        AWM: ${awm.toFixed(0)}
-      `;
+  // segurança extra (opcional, mas recomendado)
+  fator = limitar(fator, 0.7, 1.3);
+
+  // sensibilidades
+  let geral = 200 * fator;
+  let redDot = 190 * fator;
+  let mira2x = 170 * fator;
+  let mira4x = 150 * fator;
+  let awm = 130 * fator;
+
+  // limites
+  geral = limitar(geral, 140, 200);
+  redDot = limitar(redDot, 130, 195);
+  mira2x = limitar(mira2x, 120, 185);
+  mira4x = limitar(mira4x, 110, 175);
+  awm = limitar(awm, 100, 165);
+
+  document.getElementById("resultado").innerHTML = `
+    <h3>📊 Sensibilidade Calculada</h3>
+    Geral: ${geral.toFixed(0)}<br>
+    Red Dot: ${redDot.toFixed(0)}<br>
+    Mira 2x: ${mira2x.toFixed(0)}<br>
+    Mira 4x: ${mira4x.toFixed(0)}<br>
+    AWM: ${awm.toFixed(0)}
+  `;
     }
 
     if ('serviceWorker' in navigator) {
